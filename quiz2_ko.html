@@ -1,0 +1,126 @@
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+<div style="padding-bottom:50px"></div>
+	<style>
+	body { background-color:black }
+	input {
+	-webkit-appearance: none;
+	-webkit-border-radius: 0;
+}
+
+</style>
+  </head>
+
+</html>
+
+<body>
+
+
+<div class="centeringContainer">
+  <span class="centered">
+    <span class="title" style="font-size:1em; text-align:center; color:#fff;"><h1>Discover the difference between clinical standard imaging and​ <br>faster scan enhanced by​ <img src="./images/SwiftMR(white_blue).png" width="140px" /></h1><br/>
+
+
+<div style="display:none" class="quiz">
+	<hr></hr><h2>Question 1 of 5 ㅣ Brain - SwiftMR이 적용된 영상은?<h2>
+	<img src="./images/1quizA-SwiftMR.png" width="500px" height="=500px"/>
+	<img src="./images/1quizB-standard.png" width="500px" height="500px"/></div></p>
+
+<div style="display:none" class="quiz">
+	<hr></hr><h2>Question 2 of 5 ㅣ knee - SwiftMR이 적용된 영상은?</h2>
+	<img src="./images/2quizA-standard.png" width="500px" height="500px"/>
+	<img src="./images/2quizB-swiftMR.png" width="500px" height="500px"/> 
+</div>
+
+<div style="display:none" class="quiz">
+	<hr></hr><h2>Question 3 of 5 ㅣ C-Spine - SwiftMR이 적용된 영상은?</h2>
+	<img src="./images/3quizA-SwiftMR.png" width="500px" height="500px"/>
+	<img src="./images/3quizB-standard.png" width="500px" height="500px"/>
+</div>
+
+<div style="display:none" class="quiz">
+	<hr></hr><h2>Question 4 of 5 ㅣ L-Spine- SwiftMR이 적용된 영상은?</h2>
+	<img src="./images/4quizA-SwiftMR.png" width="500px" height="500px"/>
+	<img src="./images/4quizB-standard.png" width="500px" height="500px"/>
+</div>
+<div style="display:none" class="quiz">
+	<hr></hr><h2>Question 5 of 5 ㅣ  Brain - SwiftMR이 적용된 영상은?</h2>
+	<img src="./images/5quizA-standard.png" width="500px" height="500px"/>
+	<img src="./images/5quizB-swiftMR.png" width="500px" height="500px"/>
+</div>
+
+
+
+<div style="display:none" class="quiz_result">
+	1,2,1,1,2
+</div>
+<br>
+
+<div id="contents">
+</div>
+
+<script>
+
+var quizCnt = 0;
+var result = 0;
+$(document).ready(function() {
+	$(".quiz").filter(function(idx) {
+		quizCnt++;
+		var name = 1 + idx;
+		var content = this.innerHTML.trim().split("\n");
+		if(content.length > 1) {
+			$("#contents").append(content[0] );
+			for(var i = 1 ; i < content.length ; i++) {
+				$("#contents").append("<input type='radio' style='width:30px;height:30px;' name='ck"+ name + "' id='ck" + name + "_" + i + "'value='" + i + "' /><label for='ck" + name + "_" + i + "' >" + content[i] + "</label>");
+			}
+			$("#contents").append("<br /><br /><br />");
+		} else {
+			$("#contents").append("name" + ". " + content[0]);
+			$("#contents").append("<input type='text' name='ck'" + name + "' />");
+		}
+	});
+	
+	result = $(".quiz_result").text().trim().split(",");
+});
+
+function getResult() {
+	var scoreCnt = 0;
+	$(".quiz").filter(function(idx) {
+		var name = 1 + idx;
+		var content = this.innerHTML.trim().split("\n");
+		var ck_val;
+		if(content.length > 1) {
+			ck_val = ($("input[name=ck" + name + "]:checked").val() == undefined) ? "" :  $("input[name=ck" + name + "]:checked").val();
+		} else {
+			ck_val = ($("input[name=ck" + name + "]").val() == undefined) ? "" :  $("input[name=ck" + name + "]").val();
+		}
+		if(String(result[idx]) == String(ck_val)) {
+			scoreCnt++;
+		} 
+	});
+	Swal.fire(scoreCnt + "  Correct Answers ", '화면을 AIRS 크루에게 보여주세요');
+	
+	}
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<style>
+  .centeringContainer { text-align: center; }
+  .centered { display: table; margin-left: auto; margin-right: auto; display: inline-block; }
+</style>
+<hr></hr>
+
+<div style="padding-bottom:100px"></div>
+<INPUT TYPE="button" NAME="button_1" VALUE="Submit Result" style="color: #fff; background:#2150fd; border:1px; border-color: #fff; font-size:2em; border-radius:0.5em; padding:20px 20px;" onClick="getResult()"></INPUT>
+<br>
+<INPUT TYPE="button" NAME="button_2" VALUE="Home" style="color: #fff; background:none; font-size:15px; border-radius:0.5em; margin-top:50px; padding:20px 50px;" onClick="location.href='Ko_home.html'"></INPUT></br>
+<div style="padding-bottom:50px"></div>
+</body>
+
+
